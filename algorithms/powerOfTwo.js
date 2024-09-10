@@ -4,6 +4,8 @@
  * @param {number} n - the number to check
  * @return {boolean} true if the number is a power of two, false otherwise
  */
+
+// Time complexity is O(1) as we are just checking if the number is power of two
 function powerOfTwo(n){
     //we use bitwise operator & to check if the number is power of two
     if(n <= 0) return false;
@@ -20,6 +22,7 @@ function powerOfTwo(n){
  * @return {boolean} true if the number is a power of two, false otherwise
  */
 
+// Time complexity is O(log n) as we divide n by 2 inside the loop
 function powerOfTwoV2(n){
     if(n <= 0) return false;
     while(n > 1){
