@@ -1,13 +1,13 @@
 
-/* Partion function is helper to quick sort version 2*/
+                                          /* Partion function is helper to quick sort version 2*/
 // the function purpose is to find the sorted position
 // for our pivot and divide the array into 2 parts
 // elements < pivot   at the left
 // elements > pivot  at the right
 function partition(arr,low,high){
-    // assign primitive value to pivot variable
-    // the index of last element of the array
-    let pivot = high;
+    // choose the best value as pivot using median of three function
+    const mid = Math.floor((low + high) / 2);
+    const pivot = medianOfThree(arr, low, mid, high);  // 1. Choose pivot
     // i > keeps track of where the next smaller-than-pivot element should be placed
     let i=low;
     // we loop through the array from start to end
