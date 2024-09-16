@@ -1,38 +1,39 @@
+function medianOfThree(arr,start,mid,end){
+    let a = arr[start]
+    let b = arr[mid]
+    let c = arr[end]
+    if(a < b !== a < c) return a;
+    if(b < a !== b < c) return b;
+    else{ return c};
+}
 
-                                          /* Partion function is helper to quick sort version 2*/
-// the function purpose is to find the sorted position
-// for our pivot and divide the array into 2 parts
-// elements < pivot   at the left
-// elements > pivot  at the right
-function partition(arr,low,high){
-    // choose the best value as pivot using median of three function
-    const mid = Math.floor((low + high) / 2);
-    const pivot = medianOfThree(arr, low, mid, high);  // 1. Choose pivot
-    // i > keeps track of where the next smaller-than-pivot element should be placed
-    let i=low;
-    // we loop through the array from start to end
-    // the purpose of the loop is is to compare each element with the pivot and 
-    //decide whether to move it to the left (for smaller elements) or keep it in place (for larger elements).
-    for(let j=low;j<high;j++){
-        // if the element is smaller than the pivot
-        if(arr[j]<arr[pivot]){
-            // swap the element with the next smaller element
-            [arr[i],arr[j]] = [arr[j],arr[i]];
-            // the index i will be incremented only if the element is smaller than the pivot
-            // so that we can keep track of where the next smaller element should be placed
-            // while index j will increment every cycle of the loop
-            i++;
+function partition(arr,start,end){
+    const mid = Math.floor((start+end)/2);
+    const pivot = medianOfThree(arr,start,mid,end)
+    console.log(`the value of pivot is : `,pivot);
+    // we need to swap the pivot with last element of the array
+    // so pivot will be in the last index in  the array
+    let pivotIndex = arr.indexOf(pivot);
+    [arr[pivotIndex],arr[end]] = [arr[end],arr[pivotIndex]]
+    console.log(`now the pivot index is at last position of array`,end);
+    //now lets compare throw the loop between each element
+    // and the pivot
+    // if element less than pivot swap to the left
+    // else keep it in place
+    let i = start; // keep index of element avaialble for swap
+    for(let j = start; j < end ; j++){
+        if(arr[j] < pivot){
+            [arr[i],arr[j]] = [arr[j],arr[i]]
+            i++
         }
     }
-    //After the loop completes, all elements smaller than the pivot have been moved to the left
-    //but the pivot itself is still in its original position (which could be at low, mid, or high).
-    //we move the pivot to its correct position by swapping arr[i] with arr[high]
-    // arr[i] > the first element that's larger than the pivot
-    // arr[high] > where the pivot was initially stored
-    [arr[i],arr[pivot]] = [arr[pivot],arr[i]];
-    // return the index of the pivot
-    return i;
-
-    
-    
+    // now move the pivot to its right position
+    // remember that we put the pivot at the end of array
+     [arr[end],arr[i]] =[arr[i],arr[end]] ;
+    console.log(`now we move the pivot back to its right position: `,i)
+    return arr;
 }
+
+let array = [22,11,44,17,7,33,5];
+console.log(partition(array,0,6))
+

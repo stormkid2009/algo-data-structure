@@ -1,38 +1,56 @@
+function quickSort(arr) {
+    if (!Array.isArray(arr)) {
+        console.log(`Error: Please input a valid list or array.`);
+        return;
+    }
+    if (arr.length < 2) return arr;
+    return quickSortHelper(arr, 0, arr.length - 1);
+}
 
-/* Partion function is helper to quick sort version 2*/
-// the function purpose is to find the sorted position
-// for our pivot and divide the array into 2 parts
-// elements < pivot   at the left
-// elements > pivot  at the right
-function partition(arr,low,high){
-    // assign primitive value to pivot variable
-    // the index of last element of the array
-    let pivot = high;
-    // i > keeps track of where the next smaller-than-pivot element should be placed
-    let i=low;
-    // we loop through the array from start to end
-    // the purpose of the loop is is to compare each element with the pivot and 
-    //decide whether to move it to the left (for smaller elements) or keep it in place (for larger elements).
-    for(let j=low;j<high;j++){
-        // if the element is smaller than the pivot
-        if(arr[j]<arr[pivot]){
-            // swap the element with the next smaller element
-            [arr[i],arr[j]] = [arr[j],arr[i]];
-            // the index i will be incremented only if the element is smaller than the pivot
-            // so that we can keep track of where the next smaller element should be placed
-            // while index j will increment every cycle of the loop
+function quickSortHelper(arr, low, high) {
+    if (low < high) {
+        const pivotIndex = partition(arr, low, high);
+        quickSortHelper(arr, low, pivotIndex - 1);
+        quickSortHelper(arr, pivotIndex + 1, high);
+    }
+    return arr;
+}
+
+function partition(arr, low, high) {
+    const mid = Math.floor((low + high) / 2);
+    const pivot = medianOfThree(arr, low, mid, high);
+    // Move pivot to the end
+    let pivotIndex = arr.indexOf(pivot);
+    [arr[pivotIndex], arr[high]] = [arr[high], arr[pivotIndex]];
+    
+    let i = low;
+    for (let j = low; j < high; j++) {
+        if (arr[j] < arr[high]) {
+            [arr[i], arr[j]] = [arr[j], arr[i]];
             i++;
         }
     }
-    //After the loop completes, all elements smaller than the pivot have been moved to the left
-    //but the pivot itself is still in its original position (which could be at low, mid, or high).
-    //we move the pivot to its correct position by swapping arr[i] with arr[high]
-    // arr[i] > the first element that's larger than the pivot
-    // arr[high] > where the pivot was initially stored
-    [arr[i],arr[pivot]] = [arr[pivot],arr[i]];
-    // return the index of the pivot
+    [arr[i], arr[high]] = [arr[high], arr[i]];
     return i;
-
-    
-    
 }
+
+function medianOfThree(arr, low, mid, high) {
+    const a = arr[low], b = arr[mid], c = arr[high];
+    if ((a > b) !== (a > c)) return a;
+    else if ((b > a) !== (b > c)) return b;
+    else return c;
+}
+
+// Testing
+console.log(quickSort(null));                   // Expected: 'Please input a valid list or array.'
+console.log(quickSort('xyz'));                  // Expected: 'Please input a valid list or array.'
+console.log(quickSort(123));                    // Expected: 'Please input a valid list or array.'
+let list = [5, 9, 3, 4, 6, 2, 0, 1, 7, 8];
+console.log(quickSort(list));                   // Expected: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+let newList = ['d', 'e', 'c', 'a', 'f', 'b'];
+console.log(quickSort(newList));                // Expected: ['a', 'b', 'c', 'd', 'e', 'f']
+let mixList = ['a', 1, 'b', 2, 'c', 3, 'd', 4, 'e', 5, 'f', 6, 'g', 7, 'h', 8, 'i', 9, 'j', 10];
+console.log(quickSort(mixList));                // Expected: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+let capitalSmall = ['A','Z','a','z','Y','y','X','x','W','w','V','v','U','u','T','t','S','s','R','r','Q','q','P','p','O','o','N','n','M','m','L','l','K','k','J','j','I','i','H','h','G','g','F','f','E','e','D','d','C','c','B','b'];
+console.log(quickSort(capitalSmall));
