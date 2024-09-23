@@ -1,26 +1,22 @@
-function medianOfThree(arr,start,mid,end){
-    let a = arr[start]
-    let b = arr[mid]
-    let c = arr[end]
-    if(a < b !== a < c) return a;
-    if(b < a !== b < c) return b;
-    else{ return c};
-}
 
+/**
+ * Partitions the given array around a pivot element.
+ *
+ * @param {array} arr - The input array to be partitioned.
+ * @param {number} start - The starting index of the subarray to be partitioned.
+ * @param {number} end - The ending index of the subarray to be partitioned.
+ * @return {array} The partitioned array.
+ */
 function partition(arr,start,end){
     const mid = Math.floor((start+end)/2);
     const pivot = medianOfThree(arr,start,mid,end)
-    console.log(`the value of pivot is : `,pivot);
-    // we need to swap the pivot with last element of the array
-    // so pivot will be in the last index in  the array
+    // swap the pivot with last element of the array so it takes last slot
     let pivotIndex = arr.indexOf(pivot);
     [arr[pivotIndex],arr[end]] = [arr[end],arr[pivotIndex]]
-    console.log(`now the pivot index is at last position of array`,end);
-    //now lets compare throw the loop between each element
-    // and the pivot
+    //compare  between each element and the pivot
     // if element less than pivot swap to the left
     // else keep it in place
-    let i = start; // keep index of element avaialble for swap
+    let i = start; // keep the index of element avaialble for swap
     for(let j = start; j < end ; j++){
         if(arr[j] < pivot){
             [arr[i],arr[j]] = [arr[j],arr[i]]
@@ -34,6 +30,5 @@ function partition(arr,start,end){
     return arr;
 }
 
-let array = [22,11,44,17,7,33,5];
-console.log(partition(array,0,6))
+
 
