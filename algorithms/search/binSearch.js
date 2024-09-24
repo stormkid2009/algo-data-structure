@@ -1,6 +1,13 @@
 // implementaion of binary search algoritm
 // Time complexity O(log n)
 
+/**
+ * Performs a binary search on a sorted array to find the index of a target value.
+ *
+ * @param {array} arr - A sorted array of values.
+ * @param {any} target - The target value to search for.
+ * @return {number} The index of the target value if found, -1 otherwise.
+ */
 function binarySearch(arr, target) {
     let start = 0;
     let end = arr.length - 1;
