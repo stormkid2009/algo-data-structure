@@ -1,4 +1,4 @@
-
+// time complexity O(mn) if m is the length of listA and n is the length of listB
 
 /**
  * Generates the Cartesian product of two arrays.
