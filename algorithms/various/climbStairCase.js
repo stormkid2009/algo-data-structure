@@ -25,7 +25,7 @@ function climbStairCase(n) {
  * @return {number} The number of ways to climb to the top.
  */
 function climbStairCaseV2(n) {
-    
+        if(n <= 0) return `wrong number of stairs!!`;
         let noOfWays = [1,2];
         for(let i = 2 ; i <= n; i++){
             noOfWays[i] = noOfWays[i-1] + noOfWays[i-2]
@@ -34,7 +34,7 @@ function climbStairCaseV2(n) {
         return noOfWays[n-1]
     }
 
-
+console.log(climbStairCase(-1));
 console.log(climbStairCase(1));
 console.log(climbStairCase(2));
 console.log(climbStairCase(3));
