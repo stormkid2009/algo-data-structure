@@ -1,3 +1,6 @@
+// return this key word at the end of methodes allow methods chaining
+// like list.remove(1).append(2).print()
+
 class Node {
     constructor(value) {
         this.value = value;
@@ -81,13 +84,17 @@ class LinkedList {
             }
         } else {
             let prev = this.head;
+            let removedNode;
             for (let i = 0; i < index - 1; i++) {
                 prev = prev.next;
             }
+            removedNode = prev.next;
             prev.next = prev.next.next;
-            if (index === this.length - 1) {
+            if (!prev.next) {
                 this.tail = prev;
             }
+            // clean up removedNode
+            removedNode.next = null;
         }
 
         this.length--;
@@ -96,8 +103,7 @@ class LinkedList {
 
     print() {
         if (this.isEmpty()) {
-            console.log('Empty List');
-            return;
+            return `List is empty`;
         }
 
         let current = this.head;
@@ -106,20 +112,18 @@ class LinkedList {
             output += `${current.value} -> `;
             current = current.next;
         }
-        output += 'null';
-        console.log(output);
+        return output + "null";
     }
 }
 
 
 let list = new LinkedList();
-list.append(1);
-list.append(2);
-list.append(3);
-list.append(4);
-list.append(5);
-list.print();
-list.insert(6, 3);
-list.print();
-list.remove(3);
-list.print();
+  console.log(list.print());
+  list.prepend(10).append(30).insert(20, 1).insert(40, 2);
+  //list.append(30);
+  //list.insert(20, 1);
+  //list.insert(40, 2);
+  console.log(list.getLength());
+  console.log(list.print());
+  list.remove(3).append(50);
+  console.log(list.print());
