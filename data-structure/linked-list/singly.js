@@ -49,7 +49,7 @@ class LinkedList {
 
     insert(value, index) {
         if (index < 0 || index > this.length) {
-            return false;
+            throw new Error(`Invalid index ${index}`);
         }
 
         if (index === 0) {
@@ -73,18 +73,21 @@ class LinkedList {
     }
 
     remove(index) {
+        let removedNode;
         if (index < 0 || index >= this.length) {
-            return false;
+            throw new Error(`Invalid index ${index}`);
         }
 
         if (index === 0) {
+            removedNode = this.head;
             this.head = this.head.next;
+            // clean up removedNode
+            removedNode.next = null;
             if (this.length === 1) {
                 this.tail = null;
             }
         } else {
             let prev = this.head;
-            let removedNode;
             for (let i = 0; i < index - 1; i++) {
                 prev = prev.next;
             }
@@ -105,14 +108,14 @@ class LinkedList {
         if (this.isEmpty()) {
             return `List is empty`;
         }
-
+  
         let current = this.head;
-        let output = '';
+        const output = [];
         while (current) {
-            output += `${current.value} -> `;
+            output.push(current.value);
             current = current.next;
         }
-        return output + "null";
+        return output.join(' -> ') + ' -> null';
     }
 }
 
