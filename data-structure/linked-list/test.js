@@ -147,3 +147,13 @@ class LinkedList {
   }
 }
 
+const list = new LinkedList();
+list.append(1).append(2).append(3).append(4).append(5).append(6).append(7);
+console.log(list.print()); // expected output: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null   
+list.removeByValue(3);
+console.log(list.print()); // expected output: 1 -> 2 -> 4 -> 5 -> 6 -> 7 -> null
+console.log(list.removeByValue(9)); //expected output: null
+list.removeByValue(1); 
+console.log(list.print()); // expected output: 2 -> 4 -> 5 -> 6 -> 7 -> null
+list.removeByValue(7); 
+console.log(list.print()); // expected output: 2 -> 4 -> 5 -> 6 -> null
