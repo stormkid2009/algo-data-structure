@@ -1,6 +1,3 @@
-// return this key word at the end of methodes allow methods chaining
-// like list.remove(1).append(2).print()
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -25,6 +22,7 @@ class LinkedList {
 
   prepend(value) {
     const node = new Node(value);
+    // If list is empty, head and tail both point to the new node
     if (this.isEmpty()) {
       this.head = this.tail = node;
     } else {
@@ -32,11 +30,12 @@ class LinkedList {
       this.head = node;
     }
     this.length++;
-    return this;
+    return this; // Enable chaining
   }
 
   append(value) {
     const node = new Node(value);
+    // If list is empty, head and tail both point to the new node
     if (this.isEmpty()) {
       this.head = this.tail = node;
     } else {
@@ -44,7 +43,7 @@ class LinkedList {
       this.tail = node;
     }
     this.length++;
-    return this;
+    return this; // Enable chaining
   }
 
   insert(value, index) {
@@ -52,6 +51,7 @@ class LinkedList {
       throw new Error(`Invalid index ${index}`);
     }
 
+    // Directly use prepend or append based on index
     if (index === 0) {
       return this.prepend(value);
     }
@@ -69,20 +69,18 @@ class LinkedList {
     node.next = prev.next;
     prev.next = node;
     this.length++;
-    return this;
+    return this; // Enable chaining
   }
 
   remove(index) {
-    let removedNode;
     if (index < 0 || index >= this.length) {
       throw new Error(`Invalid index ${index}`);
     }
 
+    let removedNode;
     if (index === 0) {
       removedNode = this.head;
       this.head = this.head.next;
-      // clean up removedNode
-      removedNode.next = null;
       if (this.length === 1) {
         this.tail = null;
       }
@@ -92,44 +90,56 @@ class LinkedList {
         prev = prev.next;
       }
       removedNode = prev.next;
-      prev.next = prev.next.next;
+      prev.next = removedNode.next;
       if (!prev.next) {
         this.tail = prev;
       }
-      // clean up removedNode
-      removedNode.next = null;
     }
 
     this.length--;
-    return this;
+    return this; // Enable chaining
   }
 
   removeByValue(value) {
     if (this.isEmpty()) {
-      throw new Error("List is empty");
+      return null; // Consistent with returning null when not found
     }
 
     let current = this.head;
-    let prev = null; // Initially, prev is null because we haven't moved past the head.
+    let prev = null;
     while (current) {
       if (current.value === value) {
-        // If the node to remove is the head
-        if (prev === null) {
-          this.head = current.next; //if it is the only node we set head to null
+        if (prev === null) { // Node to remove is the head
+          this.head = current.next;
+          if (this.length === 1) { // If it's the only node
+            this.tail = null;
+          }
         } else {
           prev.next = current.next;
-        }
-        //check if it is the last element
-        if (!current.next) {
-          this.tail = prev;
+          if (!prev.next) { // If it's the tail node
+            this.tail = prev;
+          }
         }
         this.length--;
-        return this;
+        return this; // Enable chaining
       }
       prev = current;
       current = current.next;
     }
-    return null;
+    return null; // Value not found
+  }
+
+  search(value) {
+    let current = this.head;
+    let index = 0;
+    while (current) {
+      if (current.value === value) {
+        return index;
+      }
+      current = current.next;
+      index++;
+    }
+    return -1; // Value not found
   }
 
   print() {
@@ -147,13 +157,8 @@ class LinkedList {
   }
 }
 
+// Example usage:
 const list = new LinkedList();
 list.append(1).append(2).append(3).append(4).append(5).append(6).append(7);
-console.log(list.print()); // expected output: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null   
-list.removeByValue(3);
-console.log(list.print()); // expected output: 1 -> 2 -> 4 -> 5 -> 6 -> 7 -> null
-console.log(list.removeByValue(9)); //expected output: null
-list.removeByValue(1); 
-console.log(list.print()); // expected output: 2 -> 4 -> 5 -> 6 -> 7 -> null
-list.removeByValue(7); 
-console.log(list.print()); // expected output: 2 -> 4 -> 5 -> 6 -> null
+console.log(list.search(3)); // expected output: 2
+console.log(list.search(9)); // expected output: -1
