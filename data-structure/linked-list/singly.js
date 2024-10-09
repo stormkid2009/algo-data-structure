@@ -136,6 +136,24 @@ class LinkedList {
   }
 
 
+  reverse() {
+    if (this.isEmpty()) {
+      return null; // Consistent with returning null when not found
+    }
+
+    let current = this.head;
+    let prev = null;
+    let next = null;
+    while(current){
+      next = current.next; // Store the next node and rest of the list
+      current.next = prev; // Reverse the link
+      prev = current; // swap prev ,current and next for next iteration [0,1,2] -> [1,2,3]
+      current = next;
+    }
+    this.tail = this.head;
+    this.head = prev;
+    return this;
+  }
   search(value) {
 
     let current = this.head;
@@ -168,8 +186,5 @@ class LinkedList {
 
 const list = new LinkedList();
 list.append(1).append(2).append(3).append(4).append(5).append(6).append(7);
-console.log(list.search(3)); // expected output: 2
-console.log(list.search(9)); // expected output: -1
-list.removeByValue(4);
-console.log(list.print()); // expected output: 1 -> 2 -> 3 -> 5 -> 6 -> 7 -> null
-console.log(list.search(4)); // expected output: -1
+list.reverse();
+console.log(list.print());
