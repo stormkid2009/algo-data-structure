@@ -78,11 +78,9 @@ class LinkedList {
   remove(index) {
     if (index < 0 || index >= this.length) {
       throw new Error(`Invalid index ${index}`);
-    }
-    
-    let removedNode;
+    };
     if (index === 0) {
-      removedNode = this.head;
+      const removedNode = this.head;
       this.head = this.head.next;
       if (this.length === 1) {
         this.tail = null;
@@ -92,7 +90,7 @@ class LinkedList {
       for (let i = 0; i < index - 1; i++) {
         prev = prev.next;
       }
-      removedNode = prev.next;
+      const removedNode = prev.next;
       prev.next = prev.next.next;
       if (!prev.next) {
         this.tail = prev;
@@ -106,7 +104,7 @@ class LinkedList {
 
   removeByValue(value) {
     if (this.isEmpty()) {
-      return null; // Consistent with returning null when not found
+      throw new Error("List is empty"); // control user beahvior to protect chaining methons from errors
     }
 
     let current = this.head;
@@ -138,7 +136,7 @@ class LinkedList {
 
   reverse() {
     if (this.isEmpty()) {
-      return null; // Consistent with returning null when not found
+      throw new Error("List is empty"); // control user beahvior to protect chaining methons from errors
     }
 
     let current = this.head;
@@ -184,7 +182,4 @@ class LinkedList {
 
 
 
-const list = new LinkedList();
-list.append(1).append(2).append(3).append(4).append(5).append(6).append(7);
-list.reverse();
-console.log(list.print());
+module.exports = LinkedList
