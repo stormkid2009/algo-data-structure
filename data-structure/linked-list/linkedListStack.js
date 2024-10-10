@@ -21,7 +21,7 @@ class Stack {
   }
 
   peek() {
-    return this.list.head.value;
+    return this.list.head.value? this.list.head.value : null;
   }
 
   print() {
