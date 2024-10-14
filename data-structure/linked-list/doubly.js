@@ -157,6 +157,36 @@ class LinkedList {
     return -1;
   }
 
+  reverse() {
+    // Return immediately if the list is empty or has only one element
+    if (this.head === null || this.head.next === null) {
+        return this;
+    }
+
+    let current = this.head;
+    let temp = null;
+
+    while (current) {
+        // Swap next and prev for the current node
+        temp = current.prev;     // Temporarily store the previous node
+        current.prev = current.next; // Set prev to point to next
+        current.next = temp;     // Set next to the previous node
+
+        // Move to the next node (which is the previous one due to swap)
+        current = current.prev;
+    }
+
+    // After the loop, temp points to the new head (which was originally the tail)
+    // condition here for safty from future bugs
+    if (temp) {
+        this.tail = this.head;   // Update the tail to be the original head
+        this.head = temp.prev;   // Update the head to be the new head (last node processed)
+    }
+
+    return this;
+}
+
+
   
   print() {
     let output = [];
