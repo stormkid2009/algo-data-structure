@@ -73,16 +73,16 @@ class Queue {
 
 
 
-const queue = new Queue();
-queue.addToQueue(1);
-queue.addToQueue(2);
-queue.addToQueue(3);
-queue.addToQueue(4);
-queue.addToQueue(5);
-queue.print();
-queue.removeFromQueue();
-queue.removeFromQueue();
-queue.print();
-console.log(queue.peek());
-console.log(queue.isEmpty());
-console.log(queue.size());
+// const queue = new Queue();
+// queue.addToQueue(1);
+// queue.addToQueue(2);
+// queue.addToQueue(3);
+// queue.addToQueue(4);
+// queue.addToQueue(5);
+// queue.print();
+// queue.removeFromQueue();
+// queue.removeFromQueue();
+// queue.print();
+// console.log(queue.peek());
+// console.log(queue.isEmpty());
+// console.log(queue.size());
