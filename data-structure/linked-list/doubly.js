@@ -1,4 +1,8 @@
 class Node {
+  /**
+   * Node constructor
+   * @param {any} value - The value this node will hold
+   */
   constructor(value) {
     this.value = value;
     this.next = null;
@@ -7,19 +11,40 @@ class Node {
 }
 
 class LinkedList {
+  /**
+   * Constructs a new empty Doubly Linked List
+   */
   constructor() {
     this.head = null;
     this.tail = null;
     this.size = 0;
   }
+  
+  /**
+   * Checks if the list is empty.
+   * 
+   * @returns {boolean} true if the list is empty, false otherwise.
+   */
   isEmpty() {
     return this.size === 0;
   }
 
+  
+  /**
+   * Gets the size of the list.
+   * 
+   * @returns {number} The number of elements in the list.
+   */
   getSize() {
     return this.size;
   }
 
+  /**
+   * Adds a new node at the end of the list with the given value.
+   * 
+   * @param {*} value - The value for the new node.
+   * @returns {LinkedList} This list for chaining purposes.
+   */
   append(value) {
     const node = new Node(value);
     if (this.isEmpty()) {
@@ -33,6 +58,11 @@ class LinkedList {
     return this;
   }
 
+/**
+ * Adds a new node at the beginning of the list with the given value.
+ * 
+ * @param {*} value - The value for the new node.
+ */
   prepend(value) {
     const node = new Node(value);
     if (this.isEmpty()) {
@@ -46,6 +76,13 @@ class LinkedList {
     return this;
   }
 
+/**
+ * Inserts a new node with the given value at the specified index in the doubly linked list.
+ * 
+ * @param {*} value - The value to be inserted.
+ * @param {number} index - The index at which the value should be inserted.
+ * @returns {LinkedList} This list for chaining purposes.
+ */
   insert(value, index) {
     if (index < 0 || index > this.size) {
       throw new Error("Invalid index");
@@ -69,6 +106,13 @@ class LinkedList {
     return this;
   }
 
+  /**
+   * Removes the node at the given index from the doubly linked list.
+   * 
+   * @param {number} index - The index of the node to be removed.
+   * @returns {*} The value of the removed node.
+   * @throws {Error} If the index is invalid.
+   */
   remove(index) {
     if (index < 0 || index >= this.size) {
       throw new Error("Invalid index");
@@ -105,6 +149,13 @@ class LinkedList {
     return removedNode.value;
   }
 
+  
+  /**
+   * Removes all nodes from the list that have the given value.
+   * 
+   * @param {*} value - The value to be removed.
+   * @returns {*} The value if at least one node was found and removed, null otherwise.
+   */
   removeByValue(value) {
     let current = this.head;
     let found = false; // Flag to track if the value is found and removed
@@ -144,6 +195,12 @@ class LinkedList {
     return found ? value : null;
   }
 
+  /**
+   * Searches for a node with the specified value and returns its index.
+   * 
+   * @param {*} value - The value to search for in the list.
+   * @returns {number} The index of the node containing the value, or -1 if not found.
+   */
   search(value) {
     let current = this.head;
     let index = 0;
@@ -157,6 +214,13 @@ class LinkedList {
     return -1;
   }
 
+  /**
+   * Reverses the doubly linked list in-place.
+   * 
+   * Time complexity: O(n), where n is the size of the list.
+   * 
+   * @returns {LinkedList} This list for chaining purposes.
+   */
   reverse() {
     // Return immediately if the list is empty or has only one element
     if (this.head === null || this.head.next === null) {
@@ -188,6 +252,14 @@ class LinkedList {
 
 
   
+  /**
+   * Returns a string representation of the doubly linked list.
+   * 
+   * Time complexity: O(n), where n is the size of the list.
+   * 
+   * @returns {string} A string representation of the list in the format
+   * "null <- -> <value1> <- -> <value2> <- -> ... <- -> <valueN> <- -> null".
+   */
   print() {
     let output = [];
     let current = this.head;

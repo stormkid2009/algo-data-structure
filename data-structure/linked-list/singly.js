@@ -3,6 +3,10 @@
 
 
 class Node {
+/**
+ * Node constructor
+ * @param {any} value - The value this node will hold
+ */
   constructor(value) {
     this.value = value;
     this.next = null;
@@ -10,20 +14,39 @@ class Node {
 }
 
 class LinkedList {
+  /**
+   * Constructs a new empty Singly Linked List
+   */
   constructor() {
     this.head = null;
     this.tail = null;
     this.size = 0;
   }
 
+  /**
+   * Checks if the list is empty.
+   * 
+   * @returns {boolean} true if the list is empty, false otherwise.
+   */
   isEmpty() {
     return this.size === 0;
   }
 
+/**
+ * Gets the size of the list.
+ * 
+ * @returns {number} The number of elements in the list.
+ */
   getSize() {
     return this.size;
   }
 
+  /**
+   * Adds a new node at the beginning of the list with the given value.
+   * 
+   * @param {*} value - The value for the new node.
+   * @returns {LinkedList} This list for chaining purposes.
+   */
   prepend(value) {
     const node = new Node(value);
     // If list is empty, head and tail both point to the new node
@@ -37,6 +60,12 @@ class LinkedList {
     return this; // Enable chaining
   }
 
+  /**
+   * Adds a new node at the end of the list with the given value.
+   * 
+   * @param {*} value - The value for the new node.
+   * @returns {LinkedList} This list for chaining purposes.
+   */
   append(value) {
     const node = new Node(value);
     // If list is empty, head and tail both point to the new node
@@ -50,6 +79,14 @@ class LinkedList {
     return this; // Enable chaining
   }
 
+  /**
+   * Inserts a new node with the given value at the specified index in the singly linked list.
+   * 
+   * @param {*} value - The value to be inserted.
+   * @param {number} index - The index at which the value should be inserted.
+   * @returns {LinkedList} This list for chaining purposes.
+   * @throws {Error} If the index is invalid.
+   */
   insert(value, index) {
     if (index < 0 || index > this.size) {
       throw new Error(`Invalid index ${index}`);
@@ -76,6 +113,13 @@ class LinkedList {
     return this; // Enable chaining
   }
 
+  /**
+   * Removes the node at the given index from the singly linked list.
+   * 
+   * @param {number} index - The index of the node to be removed.
+   * @returns {*} The value of the removed node.
+   * @throws {Error} If the index is invalid.
+   */
   remove(index) {
     let removedNode;
     if (index < 0 || index >= this.size) {
@@ -104,6 +148,13 @@ class LinkedList {
     return removedNode.value; // Return the removed node
   }
 
+  /**
+   * Removes all nodes from the list that have the given value.
+   * 
+   * @param {*} value - The value to be removed.
+   * @returns {*} The value if at least one node was found and removed, null otherwise.
+   * @throws {Error} If the list is empty.
+   */
   removeByValue(value) {
     if (this.isEmpty()) {
       throw new Error("List is empty"); // control user beahvior to protect chaining methons from errors
@@ -137,6 +188,14 @@ class LinkedList {
   }
 
 
+  /**
+   * Reverses the singly linked list in-place.
+   * 
+   * Time complexity: O(n), where n is the size of the list.
+   * 
+   * @returns {LinkedList} This list for chaining purposes.
+   * @throws {Error} If the list is empty.
+   */
   reverse() {
     if (this.isEmpty()) {
       throw new Error("List is empty"); // control user beahvior to protect chaining methons from errors
@@ -155,6 +214,12 @@ class LinkedList {
     this.head = prev;
     return this;
   }
+  /**
+   * Searches for a node with the specified value and returns its index.
+   * 
+   * @param {*} value - The value to search for in the list.
+   * @returns {number} The index of the node containing the value, or -1 if not found.
+   */
   search(value) {
 
     let current = this.head;
@@ -168,6 +233,14 @@ class LinkedList {
     }
     return -1;
   }
+  /**
+   * Returns a string representation of the singly linked list.
+   * 
+   * Time complexity: O(n), where n is the size of the list.
+   * 
+   * @returns {string} A string representation of the list in the format
+   * "<value1> -> <value2> -> ... -> <valueN> -> null".
+   */
   print() {
     if (this.isEmpty()) {
       return `List is empty`;
