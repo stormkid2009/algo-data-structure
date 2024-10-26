@@ -30,3 +30,5 @@ function checkPrime(n) {
 }
 
 
+
+export default checkPrime;
