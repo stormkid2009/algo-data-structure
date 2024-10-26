@@ -71,6 +71,23 @@ class HashTable {
         return undefined;
     }
 
+    remove(key) {
+        const index = this._hash(key);
+        if (this.keyMap[index]) {
+            for (let i = 0; i < this.keyMap[index].length; i++) {
+                if (this.keyMap[index][i][0] === key) {
+                    delete this.keyMap[index][i];
+                    if (this.keyMap[index].length === 1) {
+                        delete this.keyMap[index];
+                    }
+                    this.itemCount--;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     display() {
         for (let i = 0; i < this.keyMap.length; i++) {
             if (this.keyMap[i]) {
@@ -84,10 +101,14 @@ let table = new HashTable();
 
 table.set("hello", "world");
 table.set("foo", "bar");
+table.set('oof', 'rab');
+table.set('ofo', 'arb');
 table.set("good morning", "bonjour");
 table.set("good afternoon", "bonsoir");
 table.set("good night", "bonne nuit");
 console.log(table.set("hello", "salut"));
-// table.display();
+table.display();
+table.remove("hello");
+console.log(`***************`);
+table.display();
 
-console.log(table.get("hello"));
