@@ -101,7 +101,19 @@ class HashTable {
         }
         return false;
     }
-    
+
+
+    clear() {
+        this.keyMap = new Array(this.size);
+        this.itemCount = 0;
+    }
+
+
+    count() {
+        return this.itemCount;
+    }
+
+
     keys() {
         const keys = [];
         for (let bucket of this.keyMap) {
@@ -124,6 +136,19 @@ class HashTable {
             }
         }
         return Array.from(values); // Convert the Set to an array of values
+    }
+
+
+    entries() {
+        const entries = [];
+        for (let bucket of this.keyMap) {
+            if (bucket) {
+                for (let [key, value] of bucket) {
+                    entries.push([key, value]);
+                }
+            }
+        }
+        return entries;
     }
 
 
@@ -165,4 +190,5 @@ console.log(table.keys());
 console.log(`*******************`)
 console.log(table.values());
 console.log(table.has('uk')); // true
+console.log(table.entries());
 export default HashTable;
