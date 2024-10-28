@@ -59,7 +59,17 @@ class HashTable {
         }
         return this;
     }
-
+    has(key) {
+        const index = this._hash(key);
+        if (this.keyMap[index]) {
+            for (let bucket of this.keyMap[index]) {
+                if (bucket[0] === key) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     get(key) {
         const index = this._hash(key);
         if (this.keyMap[index]) {
@@ -154,4 +164,5 @@ table.set("uk", "United Kingdom");
 console.log(table.keys());
 console.log(`*******************`)
 console.log(table.values());
+console.log(table.has('uk')); // true
 export default HashTable;
