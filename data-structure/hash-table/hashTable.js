@@ -14,7 +14,7 @@ class HashTable {
             hash = (hash * 33) ^ key.charCodeAt(i);
         }
         // Ensure hash is a positive integer and fit within the table size
-        return (hash >>> 0) % this.size;
+        return (hash & 0x7fffffff) % this.size;
     }
 
     _resize() {
@@ -57,6 +57,7 @@ class HashTable {
         if (this.itemCount / this.size > this.loadFactorThreshold) {
             this._resize();
         }
+        return this;
     }
 
     get(key) {
@@ -73,20 +74,48 @@ class HashTable {
 
     remove(key) {
         const index = this._hash(key);
-        if (this.keyMap[index]) {
-            for (let i = 0; i < this.keyMap[index].length; i++) {
-                if (this.keyMap[index][i][0] === key) {
-                    delete this.keyMap[index][i];
-                    if (this.keyMap[index].length === 1) {
-                        delete this.keyMap[index];
-                    }
+        const bucket = this.keyMap[index];
+        if (bucket) {
+            for (let i = 0; i < bucket.length; i++) {
+                if (bucket[i][0] === key) {
+                    bucket.splice(i, 1);
                     this.itemCount--;
+                    
+                    // If the bucket is empty, set it back to an empty array instead of deleting
+                    if (bucket.length === 0) {
+                        this.keyMap[index] = [];
+                    }
                     return true;
                 }
             }
         }
         return false;
     }
+    
+    keys() {
+        const keys = [];
+        for (let i = 0; i < this.keyMap.length; i++) {
+            if (this.keyMap[i]) {
+                for (let bucket of this.keyMap[i]) {
+                    keys.push(bucket[0]);
+                }
+            }
+        }
+        return keys;
+    }
+
+    values() {
+        const values = [];
+        for (let i = 0; i < this.keyMap.length; i++) {
+            if (this.keyMap[i]) {
+                for (let bucket of this.keyMap[i]) {
+                    values.push(bucket[1]);
+                }
+            }
+        }
+        return values;
+    }
+
 
     display() {
         for (let i = 0; i < this.keyMap.length; i++) {
@@ -97,18 +126,19 @@ class HashTable {
     }
 }
 
-let table = new HashTable();
+// let table = new HashTable();
 
-table.set("hello", "world");
-table.set("foo", "bar");
-table.set('oof', 'rab');
-table.set('ofo', 'arb');
-table.set("good morning", "bonjour");
-table.set("good afternoon", "bonsoir");
-table.set("good night", "bonne nuit");
-console.log(table.set("hello", "salut"));
-table.display();
-table.remove("hello");
-console.log(`***************`);
-table.display();
+// table.set("hello", "world");
+// table.set("foo", "bar");
+// table.set('oof', 'rab');
+// table.set('ofo', 'arb');
+// table.set("good morning", "bonjour");
+// table.set("good afternoon", "bonsoir");
+// table.set("good night", "bonne nuit");
+// console.log(table.set("hello", "salut"));
+// table.display();
+// table.remove("hello");
+// console.log(`***************`);
+// table.display();
 
+export default HashTable;
