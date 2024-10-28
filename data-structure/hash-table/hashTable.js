@@ -94,10 +94,10 @@ class HashTable {
     
     keys() {
         const keys = [];
-        for (let i = 0; i < this.keyMap.length; i++) {
-            if (this.keyMap[i]) {
-                for (let bucket of this.keyMap[i]) {
-                    keys.push(bucket[0]);
+        for (let bucket of this.keyMap) {
+            if (bucket) {
+                for (let [key] of bucket) {
+                    keys.push(key);
                 }
             }
         }
@@ -105,15 +105,15 @@ class HashTable {
     }
 
     values() {
-        const values = [];
-        for (let i = 0; i < this.keyMap.length; i++) {
-            if (this.keyMap[i]) {
-                for (let bucket of this.keyMap[i]) {
-                    values.push(bucket[1]);
+        const values = new Set();
+        for (let bucket of this.keyMap) {
+            if (bucket) {
+                for (let [, value] of bucket) {
+                    values.add(value);
                 }
             }
         }
-        return values;
+        return Array.from(values); // Convert the Set to an array of values
     }
 
 
@@ -126,19 +126,32 @@ class HashTable {
     }
 }
 
-// let table = new HashTable();
+let table = new HashTable();
 
-// table.set("hello", "world");
-// table.set("foo", "bar");
-// table.set('oof', 'rab');
-// table.set('ofo', 'arb');
-// table.set("good morning", "bonjour");
-// table.set("good afternoon", "bonsoir");
-// table.set("good night", "bonne nuit");
-// console.log(table.set("hello", "salut"));
+table.set("eg", "Egypt");
+table.set("br", "Brazil");
+table.set('us', 'united states');
+table.set('fr', 'France');
+table.set("ru", "Russia");
+table.set("de", "Germany");
+table.set("it", "Italy");
+table.set("sp", "Spain");
+table.set("jp", "Japan");
+table.set("ch", "China");
+table.set("in", "India");
+table.set("uk", "United Kingdom");
+table.set("au", "Australia");
+table.set("ca", "Canada");
+table.set("nz", "New Zealand");
+table.set("eu", "Europe");
+table.set("us", "America");
+table.set("uk", "United Kingdom");
+
 // table.display();
 // table.remove("hello");
 // console.log(`***************`);
 // table.display();
-
+console.log(table.keys());
+console.log(`*******************`)
+console.log(table.values());
 export default HashTable;
