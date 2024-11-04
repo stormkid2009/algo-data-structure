@@ -58,7 +58,32 @@ class BinarySearchTree {
             return this.search(node.right, value);
         }
     }
-        
+
+    preOrder(node) {
+        if (node) {
+            console.log(node.value);
+            this.preOrder(node.left);
+            this.preOrder(node.right);
+        }
+    }
+    
+    preOrderIterative(node) {
+        if(!node) {
+            return;
+    }
+    const stack = [];
+    stack.push(node);
+    while(stack.length > 0) {
+        const current = stack.pop();
+        console.log(current.value);
+        if(current.right) {
+            stack.push(current.right);
+        }
+        if(current.left) {
+            stack.push(current.left);
+        }
+    }
+}
         
 }
 
@@ -71,10 +96,11 @@ bst.insert(40);
 bst.insert(70);
 bst.insert(60);
 bst.insert(80);
-console.log(bst.search(bst.root, 30)); // expected true
-console.log(bst.search(bst.root, 100)); // expected false
-console.log(bst.search(bst.root, 70)); // expected true
-console.log(bst.search(bst.root, 60)); // expected true
-console.log(bst.search(bst.root, 10)); // expected false
-console.log(bst.search(bst.root, 10)); // expected false
-console.log(bst.search(bst.root, 10)); // expected false
+// console.log(bst.search(bst.root, 30)); // expected true
+// console.log(bst.search(bst.root, 100)); // expected false
+// console.log(bst.search(bst.root, 70)); // expected true
+// console.log(bst.search(bst.root, 60)); // expected true
+// console.log(bst.search(bst.root, 10)); // expected false
+// console.log(bst.search(bst.root, 10)); // expected false
+// console.log(bst.search(bst.root, 10)); // expected false
+console.log(bst.preOrderIterative(bst.root));
