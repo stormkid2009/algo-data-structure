@@ -97,6 +97,24 @@ class BinarySearchTree {
       console.log(node.value);
     }
   }
+
+  breadthFirstSearch(node) {
+    if (!node) {
+      return;
+    }
+    const queue = [];
+    queue.push(node);
+    while (queue.length) {
+      const current = queue.shift();
+      console.log(current.value);
+      if (current.left) {
+        queue.push(current.left);
+      }
+      if (current.right) {
+        queue.push(current.right);
+      }
+    }
+  }
 }
 
 const bst = new BinarySearchTree();
@@ -115,5 +133,4 @@ bst.insert(80);
 // console.log(bst.search(bst.root, 10)); // expected false
 // console.log(bst.search(bst.root, 10)); // expected false
 // console.log(bst.preOrderIterative(bst.root));
-console.log(bst.postOrder(bst.root));
-// console.log(bst.inOrder(bst.root));
+bst.breadthFirstSearch(bst.root);
