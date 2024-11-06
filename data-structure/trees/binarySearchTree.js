@@ -56,6 +56,8 @@ class BinarySearchTree {
     }
   }
 
+
+  // Depth First Search mthods: preOrder, inOrder, postOrder
   preOrder(node) {
     if (node) {
       console.log(node.value);
@@ -98,6 +100,8 @@ class BinarySearchTree {
     }
   }
 
+  // Breadth First Search method
+  
   breadthFirstSearch(node) {
     if (!node) {
       return;
@@ -115,6 +119,23 @@ class BinarySearchTree {
       }
     }
   }
+
+  // find min value and max value in the tree
+  min(node){
+    if (!node.left) {
+      return node.value;
+    }
+    return this.min(node.left);
+  }
+
+  max(node){
+    if (!node.right) {
+      return node.value;
+    }
+    return this.max(node.right);
+  }
+
+
 }
 
 const bst = new BinarySearchTree();
@@ -133,4 +154,6 @@ bst.insert(80);
 // console.log(bst.search(bst.root, 10)); // expected false
 // console.log(bst.search(bst.root, 10)); // expected false
 // console.log(bst.preOrderIterative(bst.root));
-bst.breadthFirstSearch(bst.root);
+// bst.breadthFirstSearch(bst.root);
+console.log(bst.min(bst.root));
+console.log(bst.max(bst.root));
