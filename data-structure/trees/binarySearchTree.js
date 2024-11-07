@@ -43,6 +43,34 @@ class BinarySearchTree {
     }
   }
 
+  // lets try inserting some value with iterative approach
+  insertIterative(value) {
+    const newNode = new Node(value);
+    // complete the code steps here
+    if (this.isEmpty()) {
+      this.root = newNode;
+      return this;
+    }
+    // lets check our way to insert the value
+    let current = this.root;
+    while (current) {
+      if (value < current.value) {
+        if (current.left === null) {
+          current.left = newNode;
+          return this;
+        }
+        current = current.left;
+      } else {
+        if (current.right === null) {
+          current.right = newNode;
+          return this;
+        }
+        current = current.right;
+      }
+    }
+
+    }
+  
   search(node, value) {
     if (!node) {
       return false;
@@ -107,10 +135,11 @@ class BinarySearchTree {
       return;
     }
     const queue = [];
+    const results = [];
     queue.push(node);
     while (queue.length) {
       const current = queue.shift();
-      console.log(current.value);
+      results.push(current.value);
       if (current.left) {
         queue.push(current.left);
       }
@@ -118,6 +147,7 @@ class BinarySearchTree {
         queue.push(current.right);
       }
     }
+    return results;
   }
 
   // find min value and max value in the tree
@@ -139,13 +169,13 @@ class BinarySearchTree {
 }
 
 const bst = new BinarySearchTree();
-bst.insert(50);
-bst.insert(30);
-bst.insert(20);
-bst.insert(40);
-bst.insert(70);
-bst.insert(60);
-bst.insert(80);
+bst.insertIterative(50);
+bst.insertIterative(30);
+bst.insertIterative(20);
+bst.insertIterative(40);
+bst.insertIterative(70);
+bst.insertIterative(60);
+bst.insertIterative(80);
 // console.log(bst.search(bst.root, 30)); // expected true
 // console.log(bst.search(bst.root, 100)); // expected false
 // console.log(bst.search(bst.root, 70)); // expected true
@@ -154,6 +184,7 @@ bst.insert(80);
 // console.log(bst.search(bst.root, 10)); // expected false
 // console.log(bst.search(bst.root, 10)); // expected false
 // console.log(bst.preOrderIterative(bst.root));
-// bst.breadthFirstSearch(bst.root);
-console.log(bst.min(bst.root));
-console.log(bst.max(bst.root));
+const result = bst.breadthFirstSearch(bst.root);
+console.log(result);
+// console.log(bst.min(bst.root));
+// console.log(bst.max(bst.root));
