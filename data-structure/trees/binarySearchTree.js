@@ -176,7 +176,7 @@ class BinarySearchTree {
 
  _deleteNode(node, value) {
    if (!node) {
-    return node;
+    return null;
    }
    if (value < node.value) {
      node.left = this._deleteNode(node.left, value);
