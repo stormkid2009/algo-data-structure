@@ -213,6 +213,15 @@ class BinarySearchTree {
    return Math.max(this.height(node.left), this.height(node.right)) + 1;
  }
  
+// check if tree is balanced
+
+ isBalanced(node = this.root) {
+  if (!node) return true;
+  const difference = Math.abs(this.height(node.left) - this.height(node.right));
+  if (difference > 1) return false;
+  return this.isBalanced(node.left) && this.isBalanced(node.right);
+ }
+
 }
 
 const bst = new BinarySearchTree();
@@ -233,8 +242,5 @@ bst.insertIterative(80);
 // console.log(bst.preOrderIterative(bst.root));
 const result = bst.breadthFirstSearch(bst.root);
 console.log(result);
-bst.delete(30);
-const modifiedResult = bst.breadthFirstSearch(bst.root);
-console.log(modifiedResult);
-// console.log(bst.min(bst.root));
-// console.log(bst.max(bst.root));
+console.log(bst.height(bst.root));
+console.log(bst.isBalanced(bst.root));
