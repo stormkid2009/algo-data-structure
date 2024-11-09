@@ -23,22 +23,22 @@ class BinarySearchTree {
       this.root = newNode;
       return this;
     } else {
-      this.insertNode(this.root, newNode);
+      this._insertNode(this.root, newNode);
     }
   }
 
-  insertNode(node, newNode) {
+  _insertNode(node, newNode) {
     if (newNode.value < node.value) {
       if (node.left === null) {
         node.left = newNode;
       } else {
-        this.insertNode(node.left, newNode);
+        this._insertNode(node.left, newNode);
       }
     } else {
       if (node.right === null) {
         node.right = newNode;
       } else {
-        this.insertNode(node.right, newNode);
+        this._insertNode(node.right, newNode);
       }
     }
   }
@@ -57,18 +57,18 @@ class BinarySearchTree {
       if (value < current.value) {
         if (current.left === null) {
           current.left = newNode;
-          return this;
+          break;
         }
         current = current.left;
       } else {
         if (current.right === null) {
           current.right = newNode;
-          return this;
+          break;
         }
         current = current.right;
       }
     }
-
+    return this;
     }
   
   search(node, value) {
@@ -77,11 +77,8 @@ class BinarySearchTree {
     }
     if (node.value === value) {
       return true;
-    } else if (value < node.value) {
-      return this.search(node.left, value);
-    } else {
-      return this.search(node.right, value);
-    }
+    } 
+    return value < node.value ? this.search(node.left, value) : this.search(node.right, value);
   }
 
 
@@ -130,42 +127,84 @@ class BinarySearchTree {
 
   // Breadth First Search method
   
+  
   breadthFirstSearch(node) {
-    if (!node) {
-      return;
-    }
-    const queue = [];
+    if (!node) return [];
+    const queue = [node];
     const results = [];
-    queue.push(node);
-    while (queue.length) {
-      const current = queue.shift();
+    for (let i = 0; i < queue.length; i++) {
+      const current = queue[i];
       results.push(current.value);
-      if (current.left) {
-        queue.push(current.left);
-      }
-      if (current.right) {
-        queue.push(current.right);
-      }
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
     }
     return results;
   }
-
   // find min value and max value in the tree
   min(node){
     if (!node.left) {
-      return node.value;
+      return node;  // return the node if there is no left node
     }
     return this.min(node.left);
   }
 
+  // Find minimum value node
+  minIterative(node = this.root) {
+    while (node && node.left) node = node.left;
+    return node;
+  }
+
   max(node){
     if (!node.right) {
-      return node.value;
+      return node;  // return the node if there is no right node
     }
     return this.max(node.right);
   }
 
 
+  maxIterative(node = this.root) {
+    while (node && node.right) node = node.right;
+    return node;
+  }
+
+
+ // delete a node from the tree
+
+ delete(value) {
+   this.root = this._deleteNode(this.root, value);
+ }
+
+ _deleteNode(node, value) {
+   if (!node) {
+    return node;
+   }
+   if (value < node.value) {
+     node.left = this._deleteNode(node.left, value);
+   }
+   else if (value > node.value) {
+     node.right = this._deleteNode(node.right, value);
+   }else{
+    // found the node to be deleted
+    // case 1: node has no children leaf node
+    if (!node.left && !node.right) {
+      return null;
+    }
+    // case 2: node has one child on the right
+    if(!node.left){
+      return node.right;
+    }
+    // case 3: node has one child on the left
+    if(!node.right){
+      return node.left;
+    }
+    // case 4: node has two children
+    // Node with two children: get the inorder successor (smallest in the right subtree)
+    let minNode = this.min(node.right);
+    node.value = minNode.value; // replace value
+    node.right = this._deleteNode(node.right, minNode.value); // delete successor
+   }
+   return node; // return the modified subtree root
+ }
 }
 
 const bst = new BinarySearchTree();
@@ -186,5 +225,8 @@ bst.insertIterative(80);
 // console.log(bst.preOrderIterative(bst.root));
 const result = bst.breadthFirstSearch(bst.root);
 console.log(result);
+bst.delete(30);
+const modifiedResult = bst.breadthFirstSearch(bst.root);
+console.log(modifiedResult);
 // console.log(bst.min(bst.root));
 // console.log(bst.max(bst.root));
