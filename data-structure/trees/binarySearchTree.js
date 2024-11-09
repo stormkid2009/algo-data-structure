@@ -205,6 +205,14 @@ class BinarySearchTree {
    }
    return node; // return the modified subtree root
  }
+
+ // calculate height of the tree
+
+ height(node = this.root) {
+   if (!node) return -1;
+   return Math.max(this.height(node.left), this.height(node.right)) + 1;
+ }
+ 
 }
 
 const bst = new BinarySearchTree();
