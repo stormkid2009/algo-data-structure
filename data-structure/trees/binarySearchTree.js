@@ -69,18 +69,19 @@ class BinarySearchTree {
       }
     }
     return this;
-    }
-  
+  }
+
   search(node, value) {
     if (!node) {
       return false;
     }
     if (node.value === value) {
       return true;
-    } 
-    return value < node.value ? this.search(node.left, value) : this.search(node.right, value);
+    }
+    return value < node.value
+      ? this.search(node.left, value)
+      : this.search(node.right, value);
   }
-
 
   // Depth First Search mthods: preOrder, inOrder, postOrder
   preOrder(node) {
@@ -126,8 +127,7 @@ class BinarySearchTree {
   }
 
   // Breadth First Search method
-  
-  
+
   breadthFirstSearch(node) {
     if (!node) return [];
     const queue = [node];
@@ -141,9 +141,9 @@ class BinarySearchTree {
     return results;
   }
   // find min value and max value in the tree
-  min(node){
+  min(node) {
     if (!node.left) {
-      return node;  // return the node if there is no left node
+      return node; // return the node if there is no left node
     }
     return this.min(node.left);
   }
@@ -154,74 +154,92 @@ class BinarySearchTree {
     return node;
   }
 
-  max(node){
+  max(node) {
     if (!node.right) {
-      return node;  // return the node if there is no right node
+      return node; // return the node if there is no right node
     }
     return this.max(node.right);
   }
-
 
   maxIterative(node = this.root) {
     while (node && node.right) node = node.right;
     return node;
   }
 
+  // delete a node from the tree
 
- // delete a node from the tree
+  delete(value) {
+    this.root = this._deleteNode(this.root, value);
+  }
 
- delete(value) {
-   this.root = this._deleteNode(this.root, value);
- }
-
- _deleteNode(node, value) {
-   if (!node) {
-    return null;
-   }
-   if (value < node.value) {
-     node.left = this._deleteNode(node.left, value);
-   }
-   else if (value > node.value) {
-     node.right = this._deleteNode(node.right, value);
-   }else{
-    // found the node to be deleted
-    // case 1: node has no children leaf node
-    if (!node.left && !node.right) {
+  _deleteNode(node, value) {
+    if (!node) {
       return null;
     }
-    // case 2: node has one child on the right
-    if(!node.left){
-      return node.right;
+    if (value < node.value) {
+      node.left = this._deleteNode(node.left, value);
+    } else if (value > node.value) {
+      node.right = this._deleteNode(node.right, value);
+    } else {
+      // found the node to be deleted
+      // case 1: node has no children leaf node
+      if (!node.left && !node.right) {
+        return null;
+      }
+      // case 2: node has one child on the right
+      if (!node.left) {
+        return node.right;
+      }
+      // case 3: node has one child on the left
+      if (!node.right) {
+        return node.left;
+      }
+      // case 4: node has two children
+      // Node with two children: get the inorder successor (smallest in the right subtree)
+      let minNode = this.min(node.right);
+      node.value = minNode.value; // replace value
+      node.right = this._deleteNode(node.right, minNode.value); // delete successor
     }
-    // case 3: node has one child on the left
-    if(!node.right){
-      return node.left;
+    return node; // return the modified subtree root
+  }
+
+  // calculate height of the tree
+
+  height(node = this.root) {
+    if (!node) return -1;
+    return Math.max(this.height(node.left), this.height(node.right)) + 1;
+  }
+
+  // check if tree is balanced
+
+  isBalanced(node = this.root) {
+    if (!node) return true;
+    const difference = Math.abs(
+      this.height(node.left) - this.height(node.right)
+    );
+    if (difference > 1) return false;
+    return this.isBalanced(node.left) && this.isBalanced(node.right);
+  }
+
+  // find parent of a node the code works good for any kind of binary tree
+  findParent(value, node = this.root, parent = null) {
+    if (!node) return null;
+    if (node.value === value) return parent;
+    return (
+      this.findParent(value, node.left, node) ||
+      this.findParent(value, node.right, node)
+    );
+  }
+
+  findParentBST(value, node = this.root, parent = null) {
+    if (!node) return null;
+    if (node.value === value) return parent;
+    if (value < node.value) {
+      return this.findParentBST(value, node.left, node);
+    } else {
+      return this.findParentBST(value, node.right, node);
     }
-    // case 4: node has two children
-    // Node with two children: get the inorder successor (smallest in the right subtree)
-    let minNode = this.min(node.right);
-    node.value = minNode.value; // replace value
-    node.right = this._deleteNode(node.right, minNode.value); // delete successor
-   }
-   return node; // return the modified subtree root
- }
-
- // calculate height of the tree
-
- height(node = this.root) {
-   if (!node) return -1;
-   return Math.max(this.height(node.left), this.height(node.right)) + 1;
- }
- 
-// check if tree is balanced
-
- isBalanced(node = this.root) {
-  if (!node) return true;
-  const difference = Math.abs(this.height(node.left) - this.height(node.right));
-  if (difference > 1) return false;
-  return this.isBalanced(node.left) && this.isBalanced(node.right);
- }
-
+  }
 }
 
 const bst = new BinarySearchTree();
@@ -242,5 +260,6 @@ bst.insertIterative(80);
 // console.log(bst.preOrderIterative(bst.root));
 const result = bst.breadthFirstSearch(bst.root);
 console.log(result);
-console.log(bst.height(bst.root));
-console.log(bst.isBalanced(bst.root));
+// console.log(bst.height(bst.root));
+// console.log(bst.isBalanced(bst.root));
+console.log(bst.findParent(60, bst.root));
