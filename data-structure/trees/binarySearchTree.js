@@ -132,11 +132,16 @@ class BinarySearchTree {
     if (!node) return [];
     const queue = [node];
     const results = [];
-    for (let i = 0; i < queue.length; i++) {
-      const current = queue[i];
-      results.push(current.value);
-      if (current.left) queue.push(current.left);
-      if (current.right) queue.push(current.right);
+    while(queue.length) {
+      const level = [];
+      let levelSize = queue.length;
+      for (let i = 0; i < levelSize; i++) {
+        const current = queue.shift();
+        level.push(current.value);
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+      }
+      results.push(level);
     }
     return results;
   }
