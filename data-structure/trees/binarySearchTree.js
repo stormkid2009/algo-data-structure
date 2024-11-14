@@ -240,6 +240,15 @@ class BinarySearchTree {
       return this.findParentBST(value, node.right, node);
     }
   }
+
+  countNodes(node = this.root) {
+    if (!node) return 0;
+    return (
+      1 +
+      this.countNodes(node.left) +
+      this.countNodes(node.right)
+    );
+  }
 }
 
 const bst = new BinarySearchTree();
@@ -263,3 +272,4 @@ console.log(result);
 // console.log(bst.height(bst.root));
 // console.log(bst.isBalanced(bst.root));
 console.log(bst.findParent(60, bst.root));
+console.log(`number of nodes in the tree ${bst.countNodes(bst.root)}`);
