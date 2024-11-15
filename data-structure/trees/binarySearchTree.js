@@ -1,4 +1,12 @@
+
 class Node {
+/**
+ * Node constructor.
+ * Initializes a new node with a given value. 
+ * The left and right child nodes are set to null initially.
+ *
+ * @param {*} value - The value to be stored in this node.
+ */
   constructor(value) {
     this.value = value;
     this.left = null;
@@ -7,16 +15,39 @@ class Node {
 }
 
 class BinarySearchTree {
+
+  /**
+   * Constructs an empty Binary Search Tree.
+   * 
+   * The root of the tree is initialized to null, indicating that the tree
+   * is initially empty.
+   */
   constructor() {
     this.root = null;
   }
 
+  /**
+   * Checks if the binary search tree is empty.
+   * 
+   * @returns {boolean} true if the tree is empty, false otherwise.
+   */
   isEmpty() {
     return this.root === null;
   }
   // binary search tree rules
   // 1. left node value < parent node value
   // 2. right node value > parent node value
+
+  
+  /**
+   * Inserts a new node with the given value into the binary search tree.
+   * 
+   * This method implements the basic insertion algorithm for a binary search tree.
+   * It recursively traverses the tree, finding the correct position to insert the new node.
+   * 
+   * @param {*} value - The value to be inserted into the tree.
+   * @returns {BinarySearchTree} This tree for chaining purposes.
+   */
   insert(value) {
     const newNode = new Node(value);
     if (this.isEmpty()) {
@@ -27,6 +58,16 @@ class BinarySearchTree {
     }
   }
 
+  /**
+   * Inserts a new node into the tree at the correct position.
+   * 
+   * This private method is called by the public insert method. It recursively
+   * traverses the tree, finding the correct position to insert the new node.
+   * 
+   * @private
+   * @param {Node} node - The current node being visited.
+   * @param {Node} newNode - The new node to be inserted.
+   */
   _insertNode(node, newNode) {
     if (newNode.value < node.value) {
       if (node.left === null) {
@@ -44,6 +85,18 @@ class BinarySearchTree {
   }
 
   // lets try inserting some value with iterative approach
+
+  
+  /**
+   * Inserts a new node with the given value into the binary search tree using an iterative approach.
+   * 
+   * This method iteratively traverses the tree to find the correct position for the new node.
+   * It starts from the root and moves downwards, comparing the value to be inserted with the current node's value,
+   * and chooses the left or right child based on the comparison, until an appropriate null child is found.
+   * 
+   * @param {*} value - The value to be inserted into the tree.
+   * @returns {BinarySearchTree} This tree for chaining purposes.
+   */
   insertIterative(value) {
     const newNode = new Node(value);
     // complete the code steps here
@@ -71,6 +124,17 @@ class BinarySearchTree {
     return this;
   }
 
+  /**
+   * Searches for a node with the specified value in the binary search tree.
+   *
+   * This method recursively traverses the tree, comparing the given value with
+   * the current node's value and choosing the left or right subtree based on
+   * the comparison.
+   *
+   * @param {Node} node - The current node being visited.
+   * @param {*} value - The value to search for in the tree.
+   * @returns {boolean} true if a node with the specified value is found, false otherwise.
+   */
   search(node, value) {
     if (!node) {
       return false;
@@ -83,7 +147,16 @@ class BinarySearchTree {
       : this.search(node.right, value);
   }
 
-  // Depth First Search mthods: preOrder, inOrder, postOrder
+  // Depth First Search implementation methods: preOrder, inOrder, postOrder
+  
+/**
+ * Performs a pre-order traversal of the binary search tree.
+ * 
+ * This method visits the root node first, then recursively visits the left subtree,
+ * followed by the right subtree.
+ * 
+ * @param {Node} node - The current node being visited in the traversal.
+ */
   preOrder(node) {
     if (node) {
       console.log(node.value);
@@ -92,6 +165,15 @@ class BinarySearchTree {
     }
   }
 
+  /**
+   * Performs a pre-order traversal of the binary search tree iteratively.
+   * 
+   * This method uses a stack to store nodes to be visited. It starts by pushing the root node onto the stack,
+   * then pops a node from the stack, logging its value and pushing its right and left children onto the stack.
+   * This process is repeated until the stack is empty.
+   * 
+   * @param {Node} node - The root node of the binary search tree.
+   */
   preOrderIterative(node) {
     if (!node) {
       return;
@@ -110,6 +192,13 @@ class BinarySearchTree {
     }
   }
 
+  /**
+   * Performs an in-order traversal of the binary search tree recursively.
+   * 
+   * This method visits the left subtree first, then the root node, and finally the right subtree.
+   * 
+   * @param {Node} node - The current node being visited in the traversal.
+   */
   inOrder(node) {
     if (node) {
       this.inOrder(node.left);
@@ -118,6 +207,14 @@ class BinarySearchTree {
     }
   }
 
+/**
+ * Performs a post-order traversal of the binary search tree.
+ * 
+ * This method recursively visits the left subtree, then the right subtree,
+ * and finally the root node, logging each node's value.
+ * 
+ * @param {Node} node - The current node being visited in the traversal.
+ */
   postOrder(node) {
     if (node) {
       this.postOrder(node.left);
@@ -128,6 +225,15 @@ class BinarySearchTree {
 
   // Breadth First Search method
 
+  /**
+   * Performs a breadth-first search of the binary search tree.
+   * 
+   * This method returns an array of arrays, where each subarray contains the node values at a given level
+   * in the tree, starting from the root node.
+   * 
+   * @param {Node} node - The root node of the binary search tree.
+   * @returns {Array<Array<*>} An array of arrays, where each subarray contains node values at a given level.
+   */
   breadthFirstSearch(node) {
     if (!node) return [];
     const queue = [node];
@@ -146,6 +252,16 @@ class BinarySearchTree {
     return results;
   }
   // find min value and max value in the tree
+  
+/**
+ * Recursively finds the node with the minimum value in the binary search tree.
+ *
+ * This method traverses the left subtree of the given node until it reaches
+ * the leftmost node, which contains the minimum value in the subtree.
+ *
+ * @param {Node} node - The current node being visited.
+ * @returns {Node} The node with the minimum value in the subtree.
+ */
   min(node) {
     if (!node.left) {
       return node; // return the node if there is no left node
@@ -153,12 +269,31 @@ class BinarySearchTree {
     return this.min(node.left);
   }
 
-  // Find minimum value node
+  // Find minimum value node iteratively
+  
+  /**
+   * Iteratively finds the node with the minimum value in the binary search tree.
+   *
+   * This method traverses the left subtree of the given node until it reaches
+   * the leftmost node, which contains the minimum value in the subtree.
+   *
+   * @param {Node} [node=this.root] - The current node being visited.
+   * @returns {Node} The node with the minimum value in the subtree.
+   */
   minIterative(node = this.root) {
     while (node && node.left) node = node.left;
     return node;
   }
 
+  /**
+   * Recursively finds the node with the maximum value in the binary search tree.
+   *
+   * This method traverses the right subtree of the given node until it reaches
+   * the rightmost node, which contains the maximum value in the subtree.
+   *
+   * @param {Node} node - The current node being visited.
+   * @returns {Node} The node with the maximum value in the subtree.
+   */
   max(node) {
     if (!node.right) {
       return node; // return the node if there is no right node
@@ -166,6 +301,15 @@ class BinarySearchTree {
     return this.max(node.right);
   }
 
+/**
+ * Iteratively finds the node with the maximum value in the binary search tree.
+ *
+ * This method traverses the right subtree of the given node until it reaches
+ * the rightmost node, which contains the maximum value in the subtree.
+ *
+ * @param {Node} [node=this.root] - The current node being visited.
+ * @returns {Node} The node with the maximum value in the subtree.
+ */
   maxIterative(node = this.root) {
     while (node && node.right) node = node.right;
     return node;
@@ -173,10 +317,31 @@ class BinarySearchTree {
 
   // delete a node from the tree
 
+  /**
+   * Deletes the node with the given value from the binary search tree.
+   *
+   * @param {*} value - The value of the node to be deleted.
+   * @returns {BinarySearchTree} This tree for chaining purposes.
+   */
   delete(value) {
     this.root = this._deleteNode(this.root, value);
   }
 
+/**
+ * Deletes a node with a specified value from the binary search tree.
+ *
+ * This private method recursively traverses the tree to find the node with the given value. 
+ * If the node is found, it handles four cases:
+ * 1. If the node is a leaf (no children), it returns null to delete the node.
+ * 2. If the node has one child on the right, it returns the right child to replace the node.
+ * 3. If the node has one child on the left, it returns the left child to replace the node.
+ * 4. If the node has two children, it finds the inorder successor (the smallest node in the right subtree),
+ *    replaces the value of the node to be deleted with the successor's value, and then deletes the successor.
+ *
+ * @param {Node} node - The current node being visited.
+ * @param {*} value - The value to be deleted from the tree.
+ * @returns {Node|null} The root of the modified subtree or null if the node is deleted.
+ */
   _deleteNode(node, value) {
     if (!node) {
       return null;
@@ -210,6 +375,15 @@ class BinarySearchTree {
 
   // calculate height of the tree
 
+  /**
+   * Calculates the height of the tree.
+   * 
+   * The height of a tree is the number of edges between the root node and the furthest leaf node.
+   * An empty tree has a height of -1.
+   * 
+   * @param {Node} [node=this.root] - The node whose height to calculate.
+   * @returns {number} The height of the tree.
+   */
   height(node = this.root) {
     if (!node) return -1;
     return Math.max(this.height(node.left), this.height(node.right)) + 1;
@@ -217,6 +391,15 @@ class BinarySearchTree {
 
   // check if tree is balanced
 
+  /**
+   * Checks if the tree is balanced.
+   * 
+   * A tree is balanced if the difference of the heights of its left and right subtrees
+   * is at most 1.
+   * 
+   * @param {Node} [node=this.root] - The node whose balance to check.
+   * @returns {boolean} true if the tree is balanced, false otherwise.
+   */
   isBalanced(node = this.root) {
     if (!node) return true;
     const difference = Math.abs(
@@ -227,6 +410,17 @@ class BinarySearchTree {
   }
 
   // find parent of a node the code works good for any kind of binary tree
+  
+  /**
+   * Finds the parent of a given node in the tree.
+   * 
+   * This method works for any kind of binary tree.
+   * 
+   * @param {*} value - The value of the node whose parent to find.
+   * @param {Node} [node=this.root] - The current node being visited.
+   * @param {Node} [parent=null] - The parent node of the current node.
+   * @returns {Node|null} The parent node of the given node, or null if the node is not found.
+   */
   findParent(value, node = this.root, parent = null) {
     if (!node) return null;
     if (node.value === value) return parent;
@@ -236,6 +430,16 @@ class BinarySearchTree {
     );
   }
 
+  /**
+   * Finds the parent of a given node in the tree.
+   * 
+   * This method works for a binary search tree (BST).
+   * 
+   * @param {*} value - The value of the node whose parent to find.
+   * @param {Node} [node=this.root] - The current node being visited.
+   * @param {Node} [parent=null] - The parent node of the current node.
+   * @returns {Node|null} The parent node of the given node, or null if the node is not found.
+   */
   findParentBST(value, node = this.root, parent = null) {
     if (!node) return null;
     if (node.value === value) return parent;
@@ -246,6 +450,12 @@ class BinarySearchTree {
     }
   }
 
+  /**
+   * Recursively counts the total number of nodes in the tree.
+   * 
+   * @param {Node} [node=this.root] - The current node being visited.
+   * @returns {number} The total number of nodes in the tree.
+   */
   countNodes(node = this.root) {
     if (!node) return 0;
     return (
@@ -256,25 +466,4 @@ class BinarySearchTree {
   }
 }
 
-const bst = new BinarySearchTree();
-bst.insertIterative(50);
-bst.insertIterative(30);
-bst.insertIterative(20);
-bst.insertIterative(40);
-bst.insertIterative(70);
-bst.insertIterative(60);
-bst.insertIterative(80);
-// console.log(bst.search(bst.root, 30)); // expected true
-// console.log(bst.search(bst.root, 100)); // expected false
-// console.log(bst.search(bst.root, 70)); // expected true
-// console.log(bst.search(bst.root, 60)); // expected true
-// console.log(bst.search(bst.root, 10)); // expected false
-// console.log(bst.search(bst.root, 10)); // expected false
-// console.log(bst.search(bst.root, 10)); // expected false
-// console.log(bst.preOrderIterative(bst.root));
-const result = bst.breadthFirstSearch(bst.root);
-console.log(result);
-// console.log(bst.height(bst.root));
-// console.log(bst.isBalanced(bst.root));
-console.log(bst.findParent(60, bst.root));
-console.log(`number of nodes in the tree ${bst.countNodes(bst.root)}`);
+module.exports = BinarySearchTree;
