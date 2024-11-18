@@ -1,6 +1,5 @@
 
-
-// Time complexity O(n)
+// Time complexity O(2^n)
 
 /**
  * Calculates the number of ways to climb to the top of a staircase with n steps, 
@@ -9,14 +8,9 @@
  * @param {number} n - The number of steps in the staircase.
  * @return {number} The number of ways to climb to the top.
  */
-export function climbStairCase(n) {
-        if(n <= 0) return 0;
-        let noOfWays = [1,2];
-        for(let i = 2 ; i <= n; i++){
-            noOfWays[i] = noOfWays[i-1] + noOfWays[i-2]
-        }
-        
-        return noOfWays[n-1]
-    }
-
-
+export function recursiveCSC(n) {
+    if (n <= 0) return 0;
+    if (n === 1) return 1;
+    if (n === 2) return 2;
+    return recursiveCSC(n - 1) + recursiveCSC(n - 2);
+}
