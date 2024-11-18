@@ -8,7 +8,7 @@
  * @param {any} target - The target value to search for.
  * @return {number} The index of the target value if found, -1 otherwise.
  */
-function recursiveBinarySearch(arr, target) {
+export function recursiveBinarySearch(arr, target) {
 
     return helper(arr, target,0,arr.length - 1);
 }
@@ -21,7 +21,7 @@ function recursiveBinarySearch(arr, target) {
  * @param {number} end - The ending index of the search range.
  * @return {number} The index of the target value if found, -1 otherwise.
  */
-function helper(arr, target,start,end) {
+ function helper(arr, target,start,end) {
     
 
         if(start > end) return -1; // Target not found
@@ -43,10 +43,4 @@ function helper(arr, target,start,end) {
 
 }
 
-// Example usage
 
-let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-console.log(recursiveBinarySearch(arr, 10)); // true
-console.log(recursiveBinarySearch(arr, 3));  // true
-console.log(recursiveBinarySearch(arr, 6));  // true
-console.log(recursiveBinarySearch(arr, 776)); // false
