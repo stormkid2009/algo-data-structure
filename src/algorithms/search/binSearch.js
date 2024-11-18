@@ -8,7 +8,7 @@
  * @param {any} target - The target value to search for.
  * @return {number} The index of the target value if found, -1 otherwise.
  */
-function binarySearch(arr, target) {
+export function binarySearch(arr, target) {
     let start = 0;
     let end = arr.length - 1;
 
@@ -33,10 +33,4 @@ function binarySearch(arr, target) {
     return -1; // Target not found
 }
 
-// Example usage
 
-let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-console.log(binarySearch(arr, 10)); // true
-console.log(binarySearch(arr, 3));  // true
-console.log(binarySearch(arr, 6));  // true
-console.log(binarySearch(arr, 776)); // false
