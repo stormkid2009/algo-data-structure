@@ -10,7 +10,7 @@
  * @param {number} n - the number to check for primality
  * @return {boolean} true if the number is prime, false otherwise
  */
-function checkPrime(n) {
+export function checkPrime(n) {
     if (n <= 1) return false; // 0 and 1 are not prime numbers
     if (n === 2 || n === 3) return true;  // 2 and 3 are prime numbers
     
