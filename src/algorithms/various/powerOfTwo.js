@@ -5,8 +5,9 @@
  * @return {boolean} true if the number is a power of two, false otherwise
  */
 
-function powerOfTwo(n){
+ function recursivePowerOfTwo(n){
     //we use bitwise operator & to check if the number is power of two
+    // it took longer time in testing than the iterative version
     if(n <= 0) return false;
     return (n & (n - 1)) === 0
 }
@@ -22,7 +23,7 @@ function powerOfTwo(n){
  * @return {boolean} true if the number is a power of two, false otherwise
  */
 
-function powerOfTwoV2(n){
+export function powerOfTwo(n){
     if(n <= 0) return false;
     while(n > 1){
         if(n % 2 !== 0) return false;
