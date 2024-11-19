@@ -7,7 +7,7 @@
  * @param {number} num - the non-negative integer to calculate the factorial for
  * @return {number} the factorial of the given number, or -1 if the input is negative
  */
-function factorial(num) {   
+export function factorial(num) {   
     if (num < 0) return -1;
     if (num === 0) return 1;
     let result = 1;
@@ -17,6 +17,3 @@ function factorial(num) {
     return result;
 }
 
-console.log(factorial(5))
-console.log(factorial(4))
-console.log(factorial(3))
