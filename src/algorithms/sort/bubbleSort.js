@@ -1,4 +1,4 @@
-function sort(arr) {
+export function sort(arr) {
     let swapped;
 
     do {
@@ -11,11 +11,7 @@ function sort(arr) {
             console.log(arr);
         }
     } while (swapped);   
-
-
     return arr;
 }
 
-const myArray = [22, 11, 5, 33, 17];
 
-sort(myArray);

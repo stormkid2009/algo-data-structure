@@ -9,7 +9,7 @@
  * @param {Array} arr - The array of elements to be sorted.
  * @return {Array} The sorted array.
  */
-function insertionSort(arr) {
+export function insertionSort(arr) {
     for (let i = 0; i < arr.length - 1; i++) {
         let key = arr[i + 1];  // key is the element to be inserted
         let j = i;
@@ -24,6 +24,3 @@ function insertionSort(arr) {
     return arr; // Return the sorted array
 }
 
-let list = [22, 11, 5, 33, 17];
-console.log(insertionSort(list));
-console.log(list);
