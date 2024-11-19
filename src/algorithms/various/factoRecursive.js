@@ -7,7 +7,7 @@
  * @param {number} n - the non-negative integer to calculate the factorial of
  * @return {number} the factorial of the given integer
  */
-function factoRecursive(n){
+export function factoRecursive(n){
 
     //base case
     if(n === 0){
@@ -17,5 +17,3 @@ function factoRecursive(n){
 }
 
 
-console.log(factoRecursive(5))
-console.log(factoRecursive(4))

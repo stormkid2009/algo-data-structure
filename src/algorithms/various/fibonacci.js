@@ -7,7 +7,7 @@
  * @param {number} num - the number of elements in the Fibonacci sequence to generate
  * @return {array|number} the generated Fibonacci sequence as an array, or 0 if num is 0, or an empty array if num is negative
  */
-let fibonacci = (num) => {
+export function fibonacci (num){
   if (num < 0) return [];
   if (num === 0) return 0;
   let list = [0, 1];
@@ -17,4 +17,3 @@ let fibonacci = (num) => {
   return list;
 };
 
-console.log(fibonacci(10));
