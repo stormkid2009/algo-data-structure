@@ -9,7 +9,7 @@
  * @param {Array} arr - the array to be sorted
  * @return {Array} the sorted array
  */
-function quickSort(arr) {
+export function quickSort(arr) {
     if(arr.length < 2) {
         return arr;
     }
