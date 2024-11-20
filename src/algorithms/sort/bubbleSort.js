@@ -1,4 +1,4 @@
-export function sort(arr) {
+export function bubbleSort(arr) {
     let swapped;
 
     do {

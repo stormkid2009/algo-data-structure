@@ -14,4 +14,10 @@ describe("insertionSort", () => {
     test("insertionSort", () => {
         expect(insertionSort(['c', 'b', 'a', 'd', 'e'])).toEqual(['a', 'b', 'c', 'd', 'e']);
     });
+    test("insertionSort", () => {
+        expect(insertionSort([])).toEqual([]);
+    });
+    test("mergeSort", () => {
+        expect(insertionSort(['B', 'A', 'C', 'D', 'E'])).toEqual(['A', 'B', 'C', 'D', 'E']);
+    });
 });

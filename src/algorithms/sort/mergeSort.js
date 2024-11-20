@@ -6,7 +6,7 @@
  * @param {Array} arr - the array to be sorted
  * @return {Array} the sorted array
  */
-function mergeSort(arr) {
+export function mergeSort(arr) {
     // base case arrat with 1 or 0 elements
     if (arr.length < 2) {
         return arr
@@ -45,5 +45,4 @@ function merge(leftArr, rightArr) {
     return [...sortedArr, ...leftArr, ...rightArr]
 }
 
-let list = [22, 11, 5, 33, 17];
-console.log(mergeSort(list))
+

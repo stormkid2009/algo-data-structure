@@ -27,5 +27,3 @@ function quickSort(arr) {
 }
 
 
-let list = [22, 11, 5, 33, 17,101,202,44,37,555,22,11,5,33,17];
-console.log(quickSort(list))
