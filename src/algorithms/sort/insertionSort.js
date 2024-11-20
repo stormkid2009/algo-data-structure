@@ -10,6 +10,9 @@
  * @return {Array} The sorted array.
  */
 export function insertionSort(arr) {
+    if (!Array.isArray(arr)) {
+        throw new TypeError('Please input a valid list or array.');
+    }
     for (let i = 0; i < arr.length - 1; i++) {
         let key = arr[i + 1];  // key is the element to be inserted
         let j = i;

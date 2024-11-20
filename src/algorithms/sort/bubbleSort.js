@@ -1,4 +1,7 @@
 export function bubbleSort(arr) {
+    if(!Array.isArray(arr)) {
+        throw new TypeError('Please input a valid list or array.');
+    }
     let swapped;
 
     do {

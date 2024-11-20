@@ -7,6 +7,10 @@
  * @return {Array} the sorted array
  */
 export function mergeSort(arr) {
+    // check if input is array
+    if(!Array.isArray(arr)) {
+        throw new TypeError('Please input a valid list or array.');
+    }
     // base case arrat with 1 or 0 elements
     if (arr.length < 2) {
         return arr

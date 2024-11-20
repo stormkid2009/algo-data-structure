@@ -10,6 +10,9 @@
  * @return {Array} the sorted array
  */
 export function quickSort(arr) {
+    if(!Array.isArray(arr)) {
+        throw new TypeError('Please input a valid list or array.');
+    }
     if(arr.length < 2) {
         return arr;
     }

@@ -2,22 +2,26 @@
 import { bubbleSort } from "../../../src/algorithms/sort/bubbleSort";
 
 describe("bubbleSort", () => {
-    test("bubbleSort", () => {
-        expect(bubbleSort([5, 3, 1, 2, 4])).toEqual([1, 2, 3, 4, 5]);
+    // Test valid cases
+    test.each([
+        { input: [5, 3, 1, 2, 4], expected: [1, 2, 3, 4, 5], description: 'unsorted array of numbers' },
+        { input: [1, 2, 3, 4, 5], expected: [1, 2, 3, 4, 5], description: 'already sorted array' },
+        { input: [5, 4, 3, 2, 1], expected: [1, 2, 3, 4, 5], description: 'reverse sorted array' },
+        { input: ['c', 'b', 'a', 'd', 'e'], expected: ['a', 'b', 'c', 'd', 'e'], description: 'unsorted array of lowercase letters' },
+        { input: [], expected: [], description: 'empty array' },
+        { input: ['B', 'A', 'C', 'D', 'E'], expected: ['A', 'B', 'C', 'D', 'E'], description: 'unsorted array of uppercase letters' }
+    ])('correctly sorts $description', ({ input, expected }) => {
+        expect(bubbleSort(input)).toStrictEqual(expected);
     });
-    test("bubbleSort", () => {
-        expect(bubbleSort([1, 2, 3, 4, 5])).toEqual([1, 2, 3, 4, 5]);
-    });
-    test("bubbleSort", () => {
-        expect(bubbleSort([5, 4, 3, 2, 1])).toEqual([1, 2, 3, 4, 5]);
-    });
-    test("bubbleSort", () => {
-        expect(bubbleSort(['c', 'b', 'a', 'd', 'e'])).toEqual(['a', 'b', 'c', 'd', 'e']);
-    });
-    test("bubbleSort", () => {
-        expect(bubbleSort([])).toEqual([]);
-    });
-    test("bubbleSort", () => {
-        expect(bubbleSort(['B', 'A', 'C', 'D', 'E'])).toEqual(['A', 'B', 'C', 'D', 'E']);
-    });
+
+    // Test invalid inputs
+    test.each([
+        { input: null, description: 'null input' },
+        { input: undefined, description: 'undefined input' },
+        { input: {}, description: 'non-array input (object)' },
+        { input: 123, description: 'non-array input (number)' },
+        { input: 'string', description: 'non-array input (string)' }
+    ])('throws an error for $description', ({ input }) => {
+        expect(() => bubbleSort(input)).toThrow(TypeError);
+    })
 });
