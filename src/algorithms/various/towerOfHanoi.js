@@ -16,6 +16,10 @@
  * @returns {Array<string>} The sequence of moves to solve the puzzle
  */
 export function towerOfHanoi(n, start, end, middle, moves = []) {
+    if (n === 0) {
+        // Base case: no disks to move
+        return moves;
+    }
     if (n === 1) {
         moves.push(`move Disk from ${start} to ${end}`);
         return moves;
