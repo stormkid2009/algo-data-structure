@@ -11,7 +11,6 @@ export function bubbleSort(arr) {
                 [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]; // swap elements
                 swapped = true;  // set swapped to true if a swap was made
             }
-            console.log(arr);
         }
     } while (swapped);   
     return arr;
