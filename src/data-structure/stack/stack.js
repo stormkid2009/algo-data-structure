@@ -79,3 +79,5 @@ class Stack {
         console.log(this.stack.toString())
     }
 }
+
+export default Stack
