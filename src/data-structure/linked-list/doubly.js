@@ -184,8 +184,10 @@ class LinkedList {
           current.next.prev = current.prev;
         }
         this.size--;
-        // Move to the next node (which is now current.next)
-        current = current.next;
+        // Move to the next node (which is now current.next) in case we dont need duplicated values we will keep remove all occurences
+        //current = current.next;
+        
+        return value; // Return immediately after removing the first occurrence
       } else {
         // Only move to the next node if no removal occurred
         current = current.next;
@@ -261,6 +263,9 @@ class LinkedList {
    * "null <- -> <value1> <- -> <value2> <- -> ... <- -> <valueN> <- -> null".
    */
   print() {
+    if (this.isEmpty()) {
+      return 'null <- -> null';
+    }
     let output = [];
     let current = this.head;
     while (current) {
@@ -271,16 +276,5 @@ class LinkedList {
   }
 }
 
-module.exports = LinkedList;
-/*
-const list = new LinkedList()
-console.log(list.isEmpty())
-console.log(list.getSize())
-list.append(30).append(40).append(50).prepend(20).prepend(10).insert(25, 2)
-console.log(list.print())
-console.log(list.remove(5))
-console.log(list.print())
-console.log(list.remove(0))
-console.log(list.print())
+export default LinkedList;
 
-*/
