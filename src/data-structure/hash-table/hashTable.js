@@ -1,4 +1,4 @@
-import checkPrime from "../../algorithms/various/primeNum.js";
+import {checkPrime} from "../../../src/algorithms/various/primeNum.js";
 const DEFAULT_SIZE = 53;
 const DEFAULT_LOAD_FACTOR_THRESHOLD = 0.7;
 const INTIAL_HASH = 5381;
@@ -267,34 +267,7 @@ class HashTable {
     }
 }
 
-// let table = new HashTable();
 
-// table.set("eg", "Egypt");
-// table.set("br", "Brazil");
-// table.set('us', 'united states');
-// table.set('fr', 'France');
-// table.set("ru", "Russia");
-// table.set("de", "Germany");
-// table.set("it", "Italy");
-// table.set("sp", "Spain");
-// table.set("jp", "Japan");
-// table.set("ch", "China");
-// table.set("in", "India");
-// table.set("uk", "United Kingdom");
-// table.set("au", "Australia");
-// table.set("ca", "Canada");
-// table.set("nz", "New Zealand");
-// table.set("eu", "Europe");
-// table.set("us", "America");
-// table.set("uk", "United Kingdom");
 
-// // table.display();
-// // table.remove("hello");
-// // console.log(`***************`);
-// // table.display();
-// console.log(table.keys());
-// console.log(`*******************`)
-// console.log(table.values());
-// console.log(table.has('uk')); // true
-// console.log(table.entries());
+
 export default HashTable;
