@@ -1,6 +1,6 @@
 
 
-const linkedList = require('./singly');
+import LinkedList from '../linked-list/singly.js';
 
 
 class Queue {
@@ -12,7 +12,7 @@ class Queue {
      * @constructor
      */
     constructor() {
-        this.list = new linkedList();
+        this.list = new LinkedList();
     } 
 
     /**
@@ -33,7 +33,8 @@ class Queue {
      * @returns {*} The element that was removed or null if the queue is empty.
      */
     dequeue() {
-        return this.list.removeByIndex(0);
+        if(this.isEmpty()) return null;
+        return this.list.remove(0);
     }
 
 /**
@@ -42,7 +43,7 @@ class Queue {
  * @returns {*} The value at the front of the queue or null if the queue is empty.
  */
     peek() {
-        return this.list.head.value? this.list.head.value : null;
+        return this.list.head? this.list.head.value : null;
     }
 
     /**
@@ -60,7 +61,7 @@ class Queue {
      * @returns {number} The number of elements in the queue.
      */
     getSize() {
-        return this.list.getLength();
+        return this.list.getSize();
     }
     /**
      * Prints the elements of the queue.
@@ -68,6 +69,11 @@ class Queue {
      * @returns {string} A string representation of the queue with its elements.
      */
     print() {
+        if(this.isEmpty()) {
+            return "List is empty";
+        }
         return this.list.print();
     }
 }
+
+export default Queue;

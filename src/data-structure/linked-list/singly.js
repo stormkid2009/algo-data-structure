@@ -1,12 +1,11 @@
 // return this key word at the end of methodes allow methods chaining like append prepend insert
 // but we prefer to return the value from some methods like remove and removeByValue
 
-
 class Node {
-/**
- * Node constructor
- * @param {any} value - The value this node will hold
- */
+  /**
+   * Node constructor
+   * @param {any} value - The value this node will hold
+   */
   constructor(value) {
     this.value = value;
     this.next = null;
@@ -25,25 +24,25 @@ class LinkedList {
 
   /**
    * Checks if the list is empty.
-   * 
+   *
    * @returns {boolean} true if the list is empty, false otherwise.
    */
   isEmpty() {
     return this.size === 0;
   }
 
-/**
- * Gets the size of the list.
- * 
- * @returns {number} The number of elements in the list.
- */
+  /**
+   * Gets the size of the list.
+   *
+   * @returns {number} The number of elements in the list.
+   */
   getSize() {
     return this.size;
   }
 
   /**
    * Adds a new node at the beginning of the list with the given value.
-   * 
+   *
    * @param {*} value - The value for the new node.
    * @returns {LinkedList} This list for chaining purposes.
    */
@@ -62,7 +61,7 @@ class LinkedList {
 
   /**
    * Adds a new node at the end of the list with the given value.
-   * 
+   *
    * @param {*} value - The value for the new node.
    * @returns {LinkedList} This list for chaining purposes.
    */
@@ -81,7 +80,7 @@ class LinkedList {
 
   /**
    * Inserts a new node with the given value at the specified index in the singly linked list.
-   * 
+   *
    * @param {*} value - The value to be inserted.
    * @param {number} index - The index at which the value should be inserted.
    * @returns {LinkedList} This list for chaining purposes.
@@ -115,7 +114,7 @@ class LinkedList {
 
   /**
    * Removes the node at the given index from the singly linked list.
-   * 
+   *
    * @param {number} index - The index of the node to be removed.
    * @returns {*} The value of the removed node.
    * @throws {Error} If the index is invalid.
@@ -124,9 +123,9 @@ class LinkedList {
     let removedNode;
     if (index < 0 || index >= this.size) {
       throw new Error(`Invalid index ${index}`);
-    };
+    }
     if (index === 0) {
-       removedNode = this.head;
+      removedNode = this.head;
       this.head = this.head.next;
       if (this.size === 1) {
         this.tail = null;
@@ -136,12 +135,11 @@ class LinkedList {
       for (let i = 0; i < index - 1; i++) {
         prev = prev.next;
       }
-       removedNode = prev.next;
+      removedNode = prev.next;
       prev.next = prev.next.next;
       if (!prev.next) {
         this.tail = prev;
       }
-      
     }
 
     this.size--;
@@ -150,7 +148,7 @@ class LinkedList {
 
   /**
    * Removes all nodes from the list that have the given value.
-   * 
+   *
    * @param {*} value - The value to be removed.
    * @returns {*} The value if at least one node was found and removed, null otherwise.
    * @throws {Error} If the list is empty.
@@ -168,7 +166,8 @@ class LinkedList {
         // If the node to remove is the head
         if (prev === null) {
           this.head = current.next; //if it is the only node we set head to null
-          if (this.size === 1) { // If it's the only node
+          if (this.size === 1) {
+            // If it's the only node
             this.tail = null;
           }
         } else {
@@ -187,12 +186,11 @@ class LinkedList {
     return null; // Value not found
   }
 
-
   /**
    * Reverses the singly linked list in-place.
-   * 
+   *
    * Time complexity: O(n), where n is the size of the list.
-   * 
+   *
    * @returns {LinkedList} This list for chaining purposes.
    * @throws {Error} If the list is empty.
    */
@@ -204,7 +202,7 @@ class LinkedList {
     let current = this.head;
     let prev = null;
     let next = null;
-    while(current){
+    while (current) {
       next = current.next; // Store the next node and rest of the list
       current.next = prev; // Reverse the link
       prev = current; // swap prev ,current and next for next iteration [0,1,2] -> [1,2,3]
@@ -216,12 +214,11 @@ class LinkedList {
   }
   /**
    * Searches for a node with the specified value and returns its index.
-   * 
+   *
    * @param {*} value - The value to search for in the list.
    * @returns {number} The index of the node containing the value, or -1 if not found.
    */
   search(value) {
-
     let current = this.head;
     let index = 0;
     while (current) {
@@ -235,9 +232,9 @@ class LinkedList {
   }
   /**
    * Returns a string representation of the singly linked list.
-   * 
+   *
    * Time complexity: O(n), where n is the size of the list.
-   * 
+   *
    * @returns {string} A string representation of the list in the format
    * "<value1> -> <value2> -> ... -> <valueN> -> null".
    */
@@ -256,6 +253,4 @@ class LinkedList {
   }
 }
 
-
-
-export default LinkedList
+export default LinkedList;
