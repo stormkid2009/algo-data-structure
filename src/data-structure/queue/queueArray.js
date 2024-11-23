@@ -18,6 +18,7 @@ class Queue {
      */
     enqueue(element) {
         this.queue.push(element);
+        return this;
     }
 
     /**
@@ -26,7 +27,14 @@ class Queue {
      * @returns {*} The element that was removed or null if the queue is empty.
      */
     dequeue() {
-        return this.queue.shift();
+        // return this.queue.shift();
+        if(this.isEmpty()) return null;
+        if(this.queue.length === 1) {
+            this.queue.pop();
+            return null;
+        }
+        this.queue.shift();
+        return this.queue[0];
     }
 
     
@@ -76,3 +84,4 @@ class Queue {
     
 }
 
+export default Queue
