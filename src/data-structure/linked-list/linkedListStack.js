@@ -1,5 +1,5 @@
 
-const  LinkedList  = require('./singly');
+import LinkedList from './singly.js';
 
 class Stack {
 
@@ -29,6 +29,7 @@ class Stack {
    * @returns {*} The element that was removed or null if the stack is empty.
    */
   pop() {
+    if(this.isEmpty()) return null;
     return this.list.remove(0);
   }
 
@@ -47,7 +48,7 @@ class Stack {
    * @returns {*} The element at the top of the stack or null if the stack is empty.
    */
   peek() {
-    return this.list.head.value? this.list.head.value : null;
+    return this.list.head? this.list.head.value : null;
   }
 
   /**
@@ -70,20 +71,5 @@ class Stack {
 
 }
 
-module.exports = Stack;
+export default Stack;
 
-/**
-const stack = new Stack();
-console.log(stack.print());
-stack.push(1).push(2).push(3).push(4).push(5);
-
-console.log(stack.print());
-console.log(stack.peek());
-console.log(stack.isEmpty());
-console.log(stack.getSize());
-stack.pop();
-console.log(stack.print());
-console.log(stack.peek());
-stack.pop();
-console.log(stack.peek());
-*/
