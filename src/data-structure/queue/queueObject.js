@@ -19,9 +19,10 @@ class Queue {
      * 
      * @param {*} element - The element to be added.
      */
-    addToQueue(element) {
+    enqueue(element) {
         this.queue[this.end] = element;
         this.end++;
+        return this;
     }
 
     /**
@@ -29,7 +30,8 @@ class Queue {
      * 
      * @returns {*} The element that was removed or null if the queue is empty.
      */
-    removeFromQueue() {
+    dequeue() {
+        if(this.isEmpty()) return undefined;
         const element = this.queue[this.start];
         delete this.queue[this.start];
         this.start++;
@@ -72,17 +74,4 @@ class Queue {
 }
 
 
-
-// const queue = new Queue();
-// queue.addToQueue(1);
-// queue.addToQueue(2);
-// queue.addToQueue(3);
-// queue.addToQueue(4);
-// queue.addToQueue(5);
-// queue.print();
-// queue.removeFromQueue();
-// queue.removeFromQueue();
-// queue.print();
-// console.log(queue.peek());
-// console.log(queue.isEmpty());
-// console.log(queue.size());
+export default Queue
