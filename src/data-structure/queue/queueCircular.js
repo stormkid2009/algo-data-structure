@@ -1,4 +1,4 @@
-class CircularQueue {
+class Queue {
     /**
      * Constructs a new CircularQueue object.
      * 
@@ -39,7 +39,7 @@ class CircularQueue {
      * 
      * @returns {boolean} true if the element was added, false if the queue is full.
      */
-    addToQueue(element) {
+    enqueue(element) {
         if (this.isFull()) return false;  // Stop adding if full
 
         this.queue[this.end] = element;
@@ -53,7 +53,7 @@ class CircularQueue {
      * 
      * @returns {*} The element that was removed or null if the queue is empty.
      */
-    removeFromQueue() {
+    dequeue() {
         if (this.isEmpty()) return null;  // Return null to indicate empty
 
         const item = this.queue[this.start];
@@ -91,24 +91,5 @@ class CircularQueue {
     }
 }
 
-// Example usage:
-// const queue = new CircularQueue(3);
-// queue.addToQueue(1);
-// queue.addToQueue(2);
-// queue.addToQueue(3);
-// queue.print();  // Output: [1, 2, 3]
-
-// queue.removeFromQueue();  // Removes 1
-// queue.print();  // Output: [null, 2, 3]
-
-// queue.removeFromQueue();  // Removes 2
-// queue.print();  // Output: [null, null, 3]
-
-// queue.addToQueue(4);
-// queue.addToQueue(5);
-
-// queue.print();  // Output: [4, 5, 3]
-
-// queue.getSize();  // Output: 3
-// console.log(queue.peek());  // Output: 3
+export default Queue;
 
