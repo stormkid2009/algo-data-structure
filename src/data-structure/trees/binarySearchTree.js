@@ -52,10 +52,10 @@ class BinarySearchTree {
     const newNode = new Node(value);
     if (this.isEmpty()) {
       this.root = newNode;
-      return this;
     } else {
       this._insertNode(this.root, newNode);
     }
+    return this;
   }
 
   /**
@@ -466,4 +466,4 @@ class BinarySearchTree {
   }
 }
 
-module.exports = BinarySearchTree;
+export default BinarySearchTree;
