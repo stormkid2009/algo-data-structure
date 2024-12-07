@@ -130,6 +130,101 @@ class Graph {
     return result;
   }
   
+  hasCycle() {
+    const visited = new Set();
+  
+    const dfs = (vertex, parent) => {
+      visited.add(vertex);
+      for (let neighbor of this.adjacencyList[vertex]) {
+        if (!visited.has(neighbor)) {
+          if (dfs(neighbor, vertex)) return true;
+        } else if (neighbor !== parent) {
+          return true;
+        }
+      }
+      return false;
+    };
+  
+    for (let vertex in this.adjacencyList) {
+      if (!visited.has(vertex)) {
+        if (dfs(vertex, null)) return true;
+      }
+    }
+  
+    return false;
+  }
+
+  
+  shortestPath(start, end) {
+    const queue = [[start]];
+    const visited = new Set();
+  
+    while (queue.length > 0) {
+      const path = queue.shift();
+      const vertex = path[path.length - 1];
+  
+      if (vertex === end) return path;
+  
+      if (!visited.has(vertex)) {
+        visited.add(vertex);
+        for (let neighbor of this.adjacencyList[vertex]) {
+          const newPath = [...path, neighbor];
+          queue.push(newPath);
+        }
+      }
+    }
+  
+    return null; // No path found
+  }
+
+  
+  isConnected() {
+    const vertices = Object.keys(this.adjacencyList);
+    if (vertices.length === 0) return true;
+  
+    const visited = new Set();
+    const stack = [vertices[0]];
+  
+    while (stack.length > 0) {
+      const vertex = stack.pop();
+      if (!visited.has(vertex)) {
+        visited.add(vertex);
+        for (let neighbor of this.adjacencyList[vertex]) {
+          stack.push(neighbor);
+        }
+      }
+    }
+  
+    return visited.size === vertices.length;
+  }
+
+  
+  isBipartite() {
+    const colors = {};
+    const queue = [];
+  
+    for (let vertex in this.adjacencyList) {
+      if (!(vertex in colors)) {
+        colors[vertex] = 0;
+        queue.push(vertex);
+  
+        while (queue.length > 0) {
+          const current = queue.shift();
+          for (let neighbor of this.adjacencyList[current]) {
+            if (!(neighbor in colors)) {
+              colors[neighbor] = 1 - colors[current];
+              queue.push(neighbor);
+            } else if (colors[neighbor] === colors[current]) {
+              return false;
+            }
+          }
+        }
+      }
+    }
+  
+    return true;
+  }
+  
 
   display() {
     for (let vertex in this.adjacencyList) {
@@ -139,3 +234,4 @@ class Graph {
 }
 
 
+export default Graph;
